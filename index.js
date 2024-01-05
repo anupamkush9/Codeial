@@ -5,7 +5,7 @@ const path = require('path');
 const port = 8000;
 const db = require('./config/mongoose');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 // express ejs layouts setup

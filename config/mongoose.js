@@ -7,7 +7,7 @@ main().then(()=>{
 })
 
 async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/Codeial');
+    await mongoose.connect('mongodb://127.0.0.1:27017/codeial');
 }
 
 const db = mongoose.connection;
