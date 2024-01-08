@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  color: orange;
+  padding: 0px 0.8rem; }
+
+ul {
+  display: flex; }
+  ul li {
+    list-style: none;
+    padding: 5px; }
+    ul li a {
+      text-decoration: none;
+      color: black;
+      background-color: white;
+      padding: 0.5rem;
+      border-radius: 10px; }
+    ul li a:hover {
+      background-color: orange; }
+  ul li:hover {
+    scale: 1.1; }

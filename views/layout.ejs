@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" type="text/css" href="/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
-    <%- include('header') %>
+    <header>
+        <%- include('header') %>
+    </header>
     
-    <%- body %>
+    <main>
+        <%- body %>
+    </main>
 
-    <%- include('footer') %>
+    <footer>
+        <%- include('footer') %>
+    </footer>
 </body>
 </html>
