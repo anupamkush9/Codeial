@@ -1,3 +1,18 @@
 
-        <h1>Codial/ <%= title %></h1>
+<h1>Codial/ <%= title %></h1>
 
+<section id="feed-posts">
+        <h4>Posts</h4>
+        <form action="/posts/create" id="new-post-form" method="post">
+                <textarea name="content" id="" cols="30" rows="10" placeholder="Type here...."></textarea>
+                <input type="submit" value="Post">
+        </form>
+</section>
+<h1>Posts</h1>
+
+<ul>
+<% for( let i = 0; i<posts.length; i++){%>
+        <li><p><%= posts[i].content %> <br>
+        <%= posts[i].user.name %></p></li>
+<% } %>
+</ul>

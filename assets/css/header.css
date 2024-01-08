@@ -7,18 +7,18 @@ header {
   color: orange;
   padding: 0px 0.8rem; }
 
-ul {
+.ul-header {
   display: flex; }
-  ul li {
+  .ul-header li {
     list-style: none;
     padding: 5px; }
-    ul li a {
+    .ul-header li a {
       text-decoration: none;
       color: black;
       background-color: white;
       padding: 0.5rem;
       border-radius: 10px; }
-    ul li a:hover {
+    .ul-header li a:hover {
       background-color: orange; }
-  ul li:hover {
+  .ul-header li:hover {
     scale: 1.1; }

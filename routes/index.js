@@ -8,5 +8,5 @@ router.get('/', homeController.home);
 router.get('/about', homeController.about);
 
 router.use('/user', require('./user'));
-
+router.use('/posts', require('./post'));
 module.exports = router;
