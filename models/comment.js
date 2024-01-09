@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Post = require('./post');
+const User = require('./user');
 
 const commentSchema = new mongoose.Schema({
     content : {
@@ -7,7 +9,7 @@ const commentSchema = new mongoose.Schema({
     },
     post : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'post'
+        ref : 'Post'
     },
     user : {
         type : mongoose.Schema.Types.ObjectId,
