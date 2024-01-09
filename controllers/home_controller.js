@@ -3,7 +3,15 @@ const post = require('../models/post');
 module.exports.home = function(req,res){
     let postsContent ;
 
-    post.find().populate('user').then((data)=>{
+    post.find()
+    .populate('user')
+    .populate({
+        path : 'comments',
+        populate : {
+            path: 'user'
+        }
+    })
+    .then((data)=>{
       return  res.render('home', {
             title : "Home",
             posts : data
