@@ -10,7 +10,7 @@ module.exports.create = function(req,res){
                 post : req.body.post,
                 user : req.user._id
             }).then((comment)=>{
-                post.comment.push(comment);
+                post.comments.push(comment);
                 post.save();  // whenever updating database call save(). to save final version
                 res.redirect('/');
             }).catch((err)=>{
