@@ -16,6 +16,14 @@
 <% for( let i = 0; i<posts.length; i++){%>
         <li><p><%= posts[i].content %> <br>
        <small> <%= posts[i].user.name %></small></p></li>
+       <div class="post-comment-list">
+        <ul>
+                <% for(cmt of posts[i].comments){ %>
+                        <li><p><%= cmt.content %></p>
+                        <small><%= cmt.user.name %></small></li>
+                <% } %>
+        </ul>
+       </div>
         <div class="post-comments">
                 <% if(locals.user){ %>
                         <form action="/comments/create" method="post">
