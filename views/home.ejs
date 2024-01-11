@@ -22,3 +22,10 @@
         
 <% } %>
 </ul>
+
+<section>
+        <h1>Profiles</h1>
+      <%  for(u of all_users){ %>
+                <li><a href="/user/profile/<%= u.id %>"><%= u.name %></a></li>
+      <%  } %>
+</section>
