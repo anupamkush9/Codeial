@@ -2,7 +2,7 @@
 
 <ul class="ul-header">
     <% if(locals.user){ %>
-        <li><a href="/user/profile"><%=user.name%></a></li>
+        <li><a href="/user/profile/<%= user.id %>"><%=user.name%></a></li>
         <li><a href="/user/sign-out">sign-out</a></li>
     <% }else{%>
         <li><a href="/user/sign-in">sign-in</a></li>
