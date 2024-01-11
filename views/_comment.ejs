@@ -1,0 +1,9 @@
+<div class="post-comments">
+        <% if(locals.user){ %>
+                <form action="/comments/create" method="post">
+                        <textarea type="text" name="content" id="" cols="25" rows="5" placeholder="type comment ..." required></textarea>
+                        <input type="hidden" name="post" value="<%= post._id %>">
+                        <input type="submit" value="Add Comment">
+                </form>
+        <% } %>
+    </div>

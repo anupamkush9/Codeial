@@ -1,0 +1,16 @@
+<li><p><%= post.content %> <br>
+        <small> <%= post.user.name %> 
+         <% if(locals.user && post.user.id == locals.user.id){ %>
+                  <a href="/posts/destroy/<%=post.id%>">Delete</a>
+          <% } %>
+         </small></p></li>
+        <!-- Displaying post comments -->
+        <div class="post-comment-list">
+         <ul>
+                 <% for(cmt of post.comments){ %>
+                         <li><p><%= cmt.content %></p>
+                         <small><%= cmt.user.name %> 
+                                <% if(locals.user && cmt.user.id == locals.user.id){ %> <a href="/comments/destroy/<%=cmt.id%>">Delete</a><% } %></small></li>
+                 <% } %>
+         </ul>
+        </div>
