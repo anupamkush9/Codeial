@@ -6,6 +6,7 @@ module.exports.create= function(req,res){
         content : req.body.content,
         user : req.user._id
     }).then((data)=>{
+        req.flash('success', 'Post created successfully !');
         res.redirect('back');
     }).catch((err)=>{
         console.log("con't create post", err);
@@ -26,7 +27,7 @@ module.exports.destroy = function(req,res){
             Comment.deleteMany({post : req.params.id}).catch((err)=>{
                 console.log("err while deleting comment");
             })
-
+            req.flash('success', 'Post deleted successfully !');
             res.redirect('/');
         }else{
             res.redirect('/');

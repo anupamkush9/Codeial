@@ -55,6 +55,7 @@ module.exports.userCreate = function(req,res){
 }
 
 module.exports.createSession = function(req,res){
+   req.flash('success', 'logged in successfully');
     // passport authenticate user then it send to controller
     return res.redirect('/');
 } 
@@ -64,7 +65,9 @@ module.exports.destroySession = function(req,res){
         if (err) {
           return res.redirect('back');
         }
-        
+        req.flash('success', 'logged out successfully');
+        return res.redirect('/');
       });
-    return res.redirect('/');
+      
+    
 }

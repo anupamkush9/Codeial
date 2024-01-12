@@ -3,7 +3,6 @@ const Post = require("../models/post");
 
 module.exports.create = function(req,res){
     Post.findById(req.body.post).then((post)=>{
-        console.log(post);
         if(post){
             Comment.create({
                 content : req.body.content,
@@ -12,6 +11,7 @@ module.exports.create = function(req,res){
             }).then((comment)=>{
                 post.comments.push(comment);
                 post.save();  // whenever updating database call save(). to save final version
+                req.flash('success', 'Comment created successfully !');
                 res.redirect('/');
             }).catch((err)=>{
                 console.log("err while creating comment");
@@ -35,6 +35,7 @@ module.exports.destroy = function(req,res){
             Comment.findByIdAndDelete(req.params.id).then(()=>{
                 console.log("deleted");
             });
+            req.flash('success', 'Comment deleted successfully !');
             res.redirect('/');
         }else{
             res.redirect('/');
