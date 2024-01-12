@@ -1,0 +1,36 @@
+.posts-friends-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    #feed-posts{
+        padding : 1rem;
+        width: 20%;
+        background-color: lightgray;
+        box-shadow: 0px  0px 2px 2px gray;
+
+    }
+    #friend{
+        display: flex;
+        justify-content: center;
+        padding : 1rem;
+        background-color: lightgray;
+        box-shadow: 0px  0px 2px 2px gray;
+        width: 20%;
+        text-align: center;
+        text-align: left;
+        .profiles{
+            h1{
+                color: purple;
+            }
+            li{
+                list-style: none;
+                padding: 0.2rem;
+                a{
+                    text-decoration: none;
+                    color: black;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.posts-friends-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  .posts-friends-container #feed-posts {
+    padding: 1rem;
+    width: 20%;
+    background-color: lightgray;
+    box-shadow: 0px  0px 2px 2px gray; }
+  .posts-friends-container #friend {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: lightgray;
+    box-shadow: 0px  0px 2px 2px gray;
+    width: 20%;
+    text-align: center;
+    text-align: left; }
+    .posts-friends-container #friend .profiles h1 {
+      color: purple; }
+    .posts-friends-container #friend .profiles li {
+      list-style: none;
+      padding: 0.2rem; }
+      .posts-friends-container #friend .profiles li a {
+        text-decoration: none;
+        color: black; }
