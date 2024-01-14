@@ -13,16 +13,16 @@
 <section>
 <h1>Posts</h1>
 
+<div id="posts-list-container">
 <ul>
 <% for( post of posts){ %>
         <!-- Displaying posts -->
         <%- include('_post') -%>
-
-       <!-- Displaying form to post comments -->
-        <%- include('_comment') -%>
         
 <% } %>
 </ul>
+</div>
+
 </section>
 <section id="friend">
         <div class="profiles">
@@ -33,3 +33,5 @@
         </div>
 </section>
 </div>
+
+<script src="/js/home_post.js"></script>
