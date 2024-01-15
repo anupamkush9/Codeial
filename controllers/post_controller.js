@@ -10,6 +10,7 @@ module.exports.create= function(req,res){
             return res.status(200).json({
                 data : {
                     post : data,
+                    name : req.user.name,
                     message : 'post created successfully !'
                 }
             })
