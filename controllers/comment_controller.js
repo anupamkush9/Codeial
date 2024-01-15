@@ -2,7 +2,10 @@ const Comment = require('../models/comment');
 const Post = require("../models/post");
 
 module.exports.create = function(req,res){
+    // console.log("entered");
+    // console.log(req.body);
     Post.findById(req.body.post).then((post)=>{
+        // console.log(post);
         if(post){
             Comment.create({
                 content : req.body.content,
@@ -11,6 +14,18 @@ module.exports.create = function(req,res){
             }).then((comment)=>{
                 post.comments.push(comment);
                 post.save();  // whenever updating database call save(). to save final version
+
+                if(req.xhr){
+                    return res.status(200).json({
+                        data : {
+                            comment : comment,
+                            name : req.user.name,
+                            message : "comment created succefully"
+                            
+                        }
+                    })
+                }
+
                 req.flash('success', 'Comment created successfully !');
                 res.redirect('/');
             }).catch((err)=>{
@@ -35,6 +50,16 @@ module.exports.destroy = function(req,res){
             Comment.findByIdAndDelete(req.params.id).then(()=>{
                 console.log("deleted");
             });
+
+            if(req.xhr){
+                return res.status(200).json({
+                    data : {
+                        comment_id : req.params.id
+                    },
+                    message : "comment deleted successfully"
+                })
+            }
+
             req.flash('success', 'Comment deleted successfully !');
             res.redirect('/');
         }else{
