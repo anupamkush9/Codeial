@@ -30,6 +30,7 @@ app.use(expressLayout);
 
 // static file setup : static file means css, script, img etc
 app.use(express.static(__dirname + '/assets'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
