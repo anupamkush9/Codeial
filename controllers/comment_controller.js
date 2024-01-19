@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require("../models/post");
+const commentMailer = require('../mailers/comments_mailer');
 
 module.exports.create = function(req,res){
     // console.log("entered");
@@ -14,6 +15,11 @@ module.exports.create = function(req,res){
             }).then((comment)=>{
                 post.comments.push(comment);
                 post.save();  // whenever updating database call save(). to save final version
+
+                // sending mail
+                comment.populate('user').then((cmt)=>{
+                    commentMailer.newComment(cmt);
+                });
 
                 if(req.xhr){
                     return res.status(200).json({
