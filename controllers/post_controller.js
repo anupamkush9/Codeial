@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 
 module.exports.create= function(req,res){
     Post.create({
@@ -28,6 +29,15 @@ module.exports.destroy = function(req,res){
         // checking user who created post is deleting or not
         // .id means converting object id into string.
         if(post.user == req.user.id){
+
+            //Changes : Delete the associated  likes for the post and all its comments
+            Like.deleteMany({likeable : post, onModel : 'Post'}).catch((err)=>{
+                console.log(err);
+            });
+            Like.deleteMany({_id: {$in: post.comments}}).catch((err)=>{
+                console.log(err);
+            });
+            
             //Deleting post
             Post.deleteOne({_id : req.params.id}).catch((err)=>{
                 console.log(err);

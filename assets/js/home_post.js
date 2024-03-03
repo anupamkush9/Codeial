@@ -12,6 +12,7 @@
                     let newPost = newPostDom(data.data);
                     $('#posts-list-container>ul').prepend(newPost);
                     deletePost($('.delete-post-button', newPost));
+                    clickLike($('.toggle-like-button', newPost));
                     createComment('#new-comment', newPost);
                     flash(data.data.message);
                     $('#post-textArea').val("");
@@ -31,7 +32,15 @@
         
                   <a class="delete-post-button" href="/posts/destroy/${data.post._id}">Delete</a>
     
-         </small></p>
+         </small>
+          
+         <small>
+                            
+                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${data.post._id}&type=Post">
+                    0 Likes
+                </a>
+                            
+        </small></p>
          
         <!-- Displaying post comments -->
 
@@ -52,6 +61,38 @@
         </div>
 
 </li>`);
+    }
+
+    let clickLike = function(likeLink){
+        $(likeLink).click(function(e){
+            e.preventDefault();
+            let self = this;
+
+            // this is a new way of writing ajax which you might've studied, it looks like the same as promises
+            $.ajax({
+                type: 'POST',
+                url: $(self).attr('href'),
+            })
+            .done(function(data) {
+                let likesCount = parseInt($(self).attr('data-likes'));
+                console.log(likesCount);
+                if (data.data.deleted == true){
+                    likesCount -= 1;
+                    
+                }else{
+                    likesCount += 1;
+                }
+
+
+                $(self).attr('data-likes', likesCount);
+                $(self).html(`${likesCount} Likes`);
+
+            })
+            .fail(function(errData) {
+                console.log('error in completing the request');
+            });
+
+        });
     }
 
     //method to delete post in DOM
@@ -103,6 +144,13 @@
                     <small>${data.name }
                         <a class="delete-comment" href="/comments/destroy/${data.comment._id}">Delete</a>
                     </small>
+                    <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${data.comment._id}&type=Comment">
+                                    0 Likes
+                                </a>
+                            
+                    </small>
             </li>`)
     }
 
@@ -136,7 +184,19 @@
         }).show();
     }
 
+// loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
+    let convertPostsToAjax = function(){
+        $('#posts-list-container>ul>li').each(function(){
+            let self = $(this);
+            let deleteButton = $(' .delete-post-button', self);
+            deletePost(deleteButton);
+
+            // get the post's id by splitting the id attribute
+            let postId = self.prop('id').split("-")[1]
+            new PostComments(postId);
+        });
+    }
 
     createPost();
-    // createComment();
+    convertPostsToAjax();
 }

@@ -9,10 +9,13 @@ module.exports.home = function(req,res){
     .populate('user')
     .populate({
         path : 'comments',
-        populate : {
-            path: 'user'
-        }
+        populate : [
+            {path : 'user'},
+            {path : 'likes'}
+        ]
+
     })
+    .populate('likes')
     .then((data)=>{
         user.find({}).then((user)=>{
             return  res.render('home', {

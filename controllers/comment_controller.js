@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require("../models/post");
 const commentMailer = require('../mailers/comments_mailer');
+const Like = require('../models/like');
 
 module.exports.create = function(req,res){
     // console.log("entered");
@@ -19,6 +20,8 @@ module.exports.create = function(req,res){
                 // sending mail
                 comment.populate('user').then((cmt)=>{
                     commentMailer.newComment(cmt);
+                }).catch((err)=>{
+                    console.log(err);
                 });
 
                 if(req.xhr){
@@ -52,6 +55,10 @@ module.exports.destroy = function(req,res){
             Post.findByIdAndUpdate(postId, {$pull : {comments:req.params.id}}).then((id)=>{
                 console.log(id);
             });
+
+            // change : Destroy the assciated likes for this comment
+            Like.deleteMany({likable : comment._id, onModel: 'Comment'});
+
             //Deleting comment
             Comment.findByIdAndDelete(req.params.id).then(()=>{
                 console.log("deleted");
