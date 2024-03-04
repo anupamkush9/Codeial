@@ -26,10 +26,27 @@
 </section>
 <section id="friend">
         <div class="profiles">
-                <h1>Friends Profiles</h1>
-              <%  for(u of all_users){ %>
-                        <li><a href="/user/profile/<%= u.id %>"><i class="fa-solid fa-user"></i> &nbsp;<%= u.name %></a></li>
-              <%  } %>
+
+                <% if(locals.user){ %>
+                        <h1 class="your-friend">Your Frinds</h1>
+
+                        <h1 class="all-user">Users Profile</h1>
+                <% } %>
+
+                <% if(! locals.user){ %>
+
+                        <h1>Users Profiles</h1>
+
+                        <%  for(u of all_users){ %>
+                                  <li>
+                                        <a href="/user/profile/<%= u.id %>"><i class="fa-solid fa-user"></i> &nbsp;<%= u.name %></a>
+                                        <% if( locals.user){ %>
+                                                <a class="toggle-friend-button" href="/friends/toggle/?id=<%=u.id %>">Follow</a>
+                                        <% } %>
+                                  </li>
+                        <%  } %>
+                <% } %>
+
         </div>
 </section>
 </div>
@@ -38,9 +55,78 @@
 
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
 <script src="js/toggle_likes.js"></script>
+<script src = "js/toggle_friends.js"></script>
+
 <script>
     $('.toggle-like-button').each(function(){
         let self = this;
         let toggleLike = new ToggleLike(self);
     });
+
+    
+
+    {
+        $.ajax({
+            type : "GET",
+            url : 'user/friends'
+        })
+        .done(function(data){
+
+                for(u of data.user.friendship){
+                                console.log(u);
+                                let friendList = friendDom(u);
+                                $('.your-friend').after(friendList);                 
+                }
+
+                for (u of data.all_users) {
+                        let isFriend = data.user.friendship.some(friend => friend.to_user._id === u._id);
+                        if (isFriend) {
+                                //  console.log("yes");
+                        } else {
+                                // console.log("no");
+                                
+                                let userList = userDom(u);
+                                $('.all-user').after(userList);
+                                
+                        }
+                }
+
+                
+        })
+        .fail(function(errData){
+                console.log("error in completing the request");
+            });
+
+        let friendDom = function(user){
+                return $(`<li>
+                                <a href="/user/profile/${user.to_user._id}"><i class="fa-solid fa-user"></i> &nbsp; ${u.to_user.name} </a>
+                                <a class="toggle-friend-button" href="/friends/toggle/?id=${user.to_user._id}">Following</a>
+
+                        </li>`
+                );
+        }
+
+        let userDom = function(u){
+                return $(`<li>
+                                <a href="/user/profile/${u._id} "><i class="fa-solid fa-user"></i> &nbsp;${u.name}</a>
+                                <a class="toggle-friend-button" href="/friends/toggle/?id=${u._id}">Follow</a>
+                        </li>`
+                );
+        }
+    }
+
+    $(document).ready(function(){
+        //     $('.toggle-friend-button').each(function(){
+        //         let self = this;
+        //         console.log("anuj");
+        //         let toggleFriend = new ToggleFriend(self);
+        //     });
+
+        $('.profiles').on('mouseenter', '.toggle-friend-button', function(event) {
+        event.preventDefault(); // Prevent default action of the link
+        console.log("Toggle friend button clicked."); // Logging for demonstration
+        // Your logic to toggle friend goes here
+        let toggleFriend = new ToggleFriend(this); // Example: Create a new ToggleFriend object
+    });
+    })
 </script>
