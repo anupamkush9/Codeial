@@ -23,6 +23,9 @@
 </ul>
 </div>
 
+<%- include('_chatBox') -%>
+
+
 </section>
 <section id="friend">
         <div class="profiles">
@@ -50,6 +53,8 @@
         </div>
 </section>
 </div>
+
+
 
 <script src="/js/home_post.js"></script>
 
@@ -130,3 +135,11 @@
     });
     })
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+<% if(locals.user){ %>
+<script>
+        new ChatEngine('user-chat-box', '<%= locals.user.email %>')
+</script>
+<% } %>
