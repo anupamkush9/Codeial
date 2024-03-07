@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const env = require('./environment');
 
 main().then(()=>{
     console.log('connection to database established');
@@ -7,7 +8,7 @@ main().then(()=>{
 })
 
 async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/codeial');
+    await mongoose.connect(`mongodb://127.0.0.1:27017/${env.db}`);
 }
 
 const db = mongoose.connection;

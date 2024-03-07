@@ -1,6 +1,6 @@
 <li id="post-<%=post._id%>">
-        <p><%= post.content %> <br>
-        <small> <%= post.user.name %> 
+        <p><%= post.content %></p>
+        <small> <small class="user-name"><%= post.user.name %></small> 
          <% if(locals.user && post.user.id == locals.user.id){ %>
                   <a class="delete-post-button" href="/posts/destroy/<%=post.id%>">Delete</a>
           <% } %>
@@ -17,7 +17,7 @@
                 <% }else{ %>
                     <%= post.likes.length %> Likes
                 <% } %>
-        </small></p>
+        </small>
 
         
         <!-- Displaying comments list -->

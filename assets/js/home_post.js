@@ -28,7 +28,7 @@
     let newPostDom = function(data){
         return $(`<li id="post-${data.post._id}">
         <p>${ data.post.content } <br>
-        <small> ${data.name } 
+        <small><small class = "user-name"> ${data.name }</small>
         
                   <a class="delete-post-button" href="/posts/destroy/${data.post._id}">Delete</a>
     
@@ -141,8 +141,8 @@
     //method to display comment in DOM
     function newCommentDom(data){
         return $(`<li id="comment-${data.comment._id}" ><p> ${data.comment.content}</p>
-                    <small>${data.name }
-                        <a class="delete-comment" href="/comments/destroy/${data.comment._id}">Delete</a>
+                    <small><small class="user-name">${data.name }</small>
+                        <a class="delete-comment-button" href="/comments/destroy/${data.comment._id}">Delete</a>
                     </small>
                     <small>
                             

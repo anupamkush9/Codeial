@@ -1,4 +1,5 @@
 const express = require('express');
+const env = require('./config/environment');
 const cookieParser = require('cookie-parser');
 const app = express();
 const path = require('path');
@@ -24,8 +25,8 @@ console.log('chat server is listening on port 5000');
   
 
 app.use(sassMiddleware({
-    src : './assets/scss',
-    dest : './assets/css',
+    src : path.join(__dirname, env.assets_path, 'scss'),
+    dest : path.join(__dirname, env.assets_path, 'css'),
     debug : true,
     outputStyle : 'extended',
     prefix : '/css'
@@ -41,7 +42,7 @@ const { mongo } = require('mongoose');
 app.use(expressLayout);
 
 // static file setup : static file means css, script, img etc
-app.use(express.static(__dirname + '/assets'));
+app.use(express.static(__dirname + env.assets_path));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // extract style and scripts from sub pages into the layout
@@ -56,7 +57,7 @@ app.use(session({
     name : 'codial',
     // ToDo change the secret before deployment in production mode
 
-    secret : 'blahsomething',
+    secret : env.session_cookie_key,
     saveUninitialized : false,
     resave : false,
     cookie : {

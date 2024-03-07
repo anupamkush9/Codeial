@@ -2,9 +2,9 @@
         <ul>
                 <% for(cmt of post.comments){ %>
                         <li><p><%= cmt.content %></p>
-                        <small><%= cmt.user.name %> 
+                        <small><small class="user-name"><%= cmt.user.name %></small> 
                                <% if(locals.user && cmt.user.id == locals.user.id){ %> 
-                                        <a href="/comments/destroy/<%=cmt.id%>">Delete</a>
+                                        <a class="delete-comment-button" href="/comments/destroy/<%=cmt.id%>">Delete</a>
                                 <% } %>
                                 <!-- <%= cmt.likes.length %>  -->
                                 <% if (locals.user){ %>

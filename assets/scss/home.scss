@@ -34,3 +34,93 @@
         }
     }
 }
+
+.posts{
+    .feed-icon{
+        color: orange;
+    }
+    h1{
+        margin : 5px;
+        text-align: center;
+        background-color: black;
+        color: white;
+        padding : 5px;
+        border-radius: 25px 25px 25px 25px;
+    }
+}
+
+#posts-list-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: top;
+
+    .ul-post{
+        padding: 0px 0px 0px 5px;
+        margin : 0px;
+        margin-bottom: 5px;
+    }
+
+    li{
+        margin-top:30px;
+        margin-bottom: 0px;
+        background: white;
+        list-style: none;
+        border-radius: 0px 10px 10px 0px;
+        padding : 10px 10px 10px 20px;
+        box-shadow: 2px 2px lightgray;
+        background: linear-gradient(135deg,#ffffff, whitesmoke);
+
+        
+        .user-name{
+            background-color: black;
+            padding : 2px 4px;
+            color : orange;
+            font-size: 12px;
+            border-radius: 5px 0px;
+            margin-right: 2px;
+        }
+
+        .delete-post-button{
+            text-decoration: none;
+            background-color: rgba(223, 25, 25, 0.904);
+            padding : 2px 4px;
+            color : white;
+            border-radius: 5px 0px;
+        }
+
+        .delete-comment-button{
+            text-decoration: none;
+            background-color: rgba(223, 25, 25, 0.904);
+            padding : 2px 4px;
+            color : white;
+            border-radius: 5px 0px;
+        }
+
+        .toggle-like-button{
+            text-decoration: none;
+            background-color: #58d258;
+            padding : 2px 4px;
+            color : white;
+            border-radius: 5px 0px;
+        }
+
+        p{
+            margin : 5px;
+            font-size: 20px;
+            
+        }
+
+        .post-comment-list{
+            li{
+                margin : 0px;
+                box-shadow: none;
+                background: none;
+                p{
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+
+}
